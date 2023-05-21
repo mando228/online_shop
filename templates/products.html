@@ -56,7 +56,7 @@
             </div>
 
             <div class="row">
-                {% for product in products %}
+                {% for product in object_list %}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
                         <a href="#">
@@ -82,6 +82,7 @@
 
             </div>
 
+        {% if is_paginated %}
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item {% if not products.has_previos %} disabled {% endif %}">
@@ -91,8 +92,8 @@
                         {% else %}
                         {% endif %}" tabindex="-1" aria-disabled="true">Previous</a>
                     </li>
-                    {% for page in products.paginator.page_range %}
-                    <li class="page-item"><a class="page-link" href="{% url 'paginator' page %}">{{ page }}</a></li>
+                    {% for page in page_obj.paginator.page_range %}
+                        <li class="page-item"><a class="page-link" href="{% url 'paginator' page %}">{{ page }}</a></li>
                     {% endfor %}
                     <li class="page-item {% if not products.has_previos %} disabled {% endif %}" >
                         <a class="page-link" href="
@@ -103,6 +104,8 @@
                     </li>
                 </ul>
             </nav>
+            {% else %}
+            {% endif %}
 
         </div>
 
